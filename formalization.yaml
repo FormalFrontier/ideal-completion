@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/v0.4.schema.json
+version: "v0.4"
+
+project:
+  name: "ideal-completion"
+  description: >-
+    Ideal completions of bounded distributive lattices: the injective principal
+    bounded lattice homomorphism, finite-join witnesses for arbitrary suprema,
+    frame structure, compact-principal characterization and compact generation.
+  authors:
+    - "Formal Frontier Agents"
+  responsible_maintainers:
+    - "Formal Frontier source-maintainer team"
+  license: "Apache-2.0"
+
+sources:
+  - title: "Ideal completion of a bounded distributive lattice"
+    type: "folklore"
+    relationship: "independently-proves"
+    note: >-
+      Classical order theory, proved here with mathlib's native order ideals.
+      No novelty of the mathematical results or human/source-author endorsement
+      is claimed.
+  - title: "Foundations of Rigid Geometry I"
+    authors:
+      - "Kazuhiro Fujiwara"
+      - "Fumiharu Kato"
+    id: "https://arxiv.org/abs/1308.4734v5"
+    type: "book"
+    location: "Chapter 0, section 2.2(b), paragraph after Definition 2.2.6, printed page 38"
+    relationship: "background"
+    note: >-
+      Motivating description of the ideal completion, principal embedding and
+      finite (order-theoretically compact) elements. Detailed source-coverage
+      decisions are maintained separately, not asserted by this metadata.
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: >-
+      Uses Order.Ideal, BoundedLatticeHom, Order.Frame and compact-element
+      infrastructure at the revision pinned by the Lake manifest.
+
+automation:
+  methods:
+    - method: "agent"
+      tool_setup: >-
+        Formal Frontier AI agents using Lean, Lake, Git and the Hive task
+        environment for proof development, independent review and maintenance.
+  notes: >-
+    Authorship and review are performed by distinct agent executions. Specific
+    model versions, costs and time measurements are not inferred from service
+    identities and are omitted where no reliable project-wide record is available.
+
+status:
+  scope: >-
+    Reusable bounded-distributive-lattice ideal completion only. Prime-ideal
+    existence, spectra, Stone duality and whole-source formalization are excluded.
+
+review:
+  status: "other: revision-specific independent agent reviews recorded below"
+  notes: >-
+    The core at accepted commit 5626929044338bfda910936feca0ca416ab816ba
+    received fresh-context Worker A review 314 of candidate
+    97b067b9e457c5871c2f252a716c1a14a3d47c37 (Task
+    hive-request-3f337e670d7e01d9dab72a8868b136dd12086ce5, UID
+    9923855b-07bc-41e7-bfe0-56f325acd8ed). That development review is not
+    final-release acceptance. Ordinary module/example/documentation readiness
+    at candidate 929377cd6c3ec229e886286c6eb33f3837e776c5 was independently
+    reviewed by Worker A Task hive-request-4b334cb54b1ebb0f86dc9e5a1e34711804524d5b
+    (UID 5fce429a-e250-4e6b-9982-7dad59e92f58), review 2960, and integrated at
+    aafdfd1944649c168c519750a20c24df3cd508a1. On 2026-09-25, the independent
+    non-author Atlas agent reviewed the complete internal release artifact at
+    22c8ea8b5a559df6e5f6257472378a19388f448d, tree
+    27426a1256468d75210df20e1278227ad3613889, in review 3053. That review
+    covered the generated API reference, build and proof evidence, semantics,
+    provenance and rights, and recommended internal-artifact readiness. It did
+    not approve a public commit history, publication, or source-text coverage.
+    These are historical reviews of the named revisions, not a self-certification
+    of this metadata or an approval of later changes. Each release candidate
+    requires applicable independent review and a separate publication decision.
+
+acknowledgements: >-
+  Lean and mathlib authors for the proof assistant, tactics and native
+  mathematical infrastructure; Formal Frontier's source-maintainer team for
+  development, review and integration.

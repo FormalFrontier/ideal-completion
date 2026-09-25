@@ -1,0 +1,35 @@
+{
+  "analyzed_source_revision": "3359d255c9831e0806ca6fe8c86ce6a327783f64",
+  "api_sha256": "e05e77dc892420e2b59c43151846f289fda7c242f8afb671857d111169e9bb9d",
+  "docgen_revision": "97d4ecdfc8e09e7f511724c25e303d448de6a3db",
+  "format": 1,
+  "generator": "scripts/generate_api.py",
+  "inputs": {
+    "Examples/IdealCompletion.lean": "ebc009915110c60452d10e647128e4e06e5442ef75b6790130f37a31ee69218e",
+    "IdealCompletion.lean": "9e5715401fcd905b273da33fda41773ac58dcb5069fdb33f424bcf515c8ce7b4",
+    "IdealCompletion/OrderIdeal.lean": "6397dc97be74884c8da26da2688eed4c3b56314cf5363a392f37b10558f42f2f",
+    "lake-manifest.json": "4a3cbb1aaa860375538615a3c21bbb01002f19d30e76266284ad10d0917860e3",
+    "lakefile.toml": "1f5ac47c77263ade7c41806f45e7714faabdf80abdedd995371892aa592fbc15",
+    "lean-toolchain": "8190e75a201741065fe508b28955dd64dd72d090babe5f70ce6848879d68ae88"
+  },
+  "modules": [
+    "IdealCompletion.OrderIdeal",
+    "IdealCompletion",
+    "Examples.IdealCompletion"
+  ],
+  "native_record_sha256": {
+    "Examples.IdealCompletion": "2d77f64d0ec68b32d185d122fdf779bf78c78ec5602412a19a01212e3119d244",
+    "IdealCompletion": "c57afa88af70c9050f154898c8a16a56f830fd10162caed6454f15f70368faf0",
+    "IdealCompletion.OrderIdeal": "a72c8f3b9ea4e055e381f50d860e56cec0e56e6cc3c7e5c531d77eb93d321191"
+  },
+  "proof_certification": false,
+  "public_declarations": [
+    "Order.Ideal.principalHom",
+    "Order.Ideal.principalHom_injective",
+    "Order.Ideal.mem_sSup_iff",
+    "Order.Ideal.instFrame_idealCompletion",
+    "Order.Ideal.isCompactElement_principal",
+    "Order.Ideal.isCompactElement_iff_eq_principal",
+    "Order.Ideal.instIsCompactlyGenerated_idealCompletion"
+  ]
+}
