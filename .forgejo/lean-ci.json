@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "mode": "strict",
+  "projects": [
+    {
+      "path": ".",
+      "targets": [
+        "IdealCompletion",
+        "IdealCompletionExamples"
+      ]
+    }
+  ],
+  "docs_only_paths": []
+}
