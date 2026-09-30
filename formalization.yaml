@@ -45,40 +45,33 @@ automation:
   methods:
     - method: "agent"
       tool_setup: >-
-        Formal Frontier AI agents using Lean, Lake, Git and the Hive task
-        environment for proof development, independent review and maintenance.
+        Formal Frontier AI agents using Lean, Lake and Git for formalization,
+        documentation and maintenance, with separate independent agent review.
   notes: >-
-    Authorship and review are performed by distinct agent executions. Specific
-    model versions, costs and time measurements are not inferred from service
-    identities and are omitted where no reliable project-wide record is available.
+    The mathematical core and reference adapter/assembly were prepared by the
+    Anchor AI agent; another AI contributor prepared module/example readiness.
+    Independent agent reviewers examined the earlier work. No human peer review
+    or source-author endorsement is implied; model versions and costs are not
+    inferred from service identities.
 
 status:
   scope: >-
-    Reusable bounded-distributive-lattice ideal completion only. Prime-ideal
-    existence, spectra, Stone duality and whole-source formalization are excluded.
+    For DistribLattice A and BoundedOrder A, reusable ideal completion with an
+    injective principal bounded lattice homomorphism, finite-join witnesses for
+    arbitrary suprema, frame structure, compact iff principal and compact
+    generation. Does not include prime-ideal existence, spectra, Stone duality,
+    universal extension or generic partial-order completion, and does not claim
+    whole-source formalization.
 
 review:
-  status: "other: revision-specific independent agent reviews recorded below"
+  status: "other: historical revision-specific independent agent assessments"
   notes: >-
-    The core at accepted commit 5626929044338bfda910936feca0ca416ab816ba
-    received fresh-context Worker A review 314 of candidate
-    97b067b9e457c5871c2f252a716c1a14a3d47c37 (Task
-    hive-request-3f337e670d7e01d9dab72a8868b136dd12086ce5, UID
-    9923855b-07bc-41e7-bfe0-56f325acd8ed). That development review is not
-    final-release acceptance. Ordinary module/example/documentation readiness
-    at candidate 929377cd6c3ec229e886286c6eb33f3837e776c5 was independently
-    reviewed by Worker A Task hive-request-4b334cb54b1ebb0f86dc9e5a1e34711804524d5b
-    (UID 5fce429a-e250-4e6b-9982-7dad59e92f58), review 2960, and integrated at
-    aafdfd1944649c168c519750a20c24df3cd508a1. On 2026-09-25, the independent
-    non-author Atlas agent reviewed the complete internal release artifact at
-    22c8ea8b5a559df6e5f6257472378a19388f448d, tree
-    27426a1256468d75210df20e1278227ad3613889, in review 3053. That review
-    covered the generated API reference, build and proof evidence, semantics,
-    provenance and rights, and recommended internal-artifact readiness. It did
-    not approve a public commit history, publication, or source-text coverage.
-    These are historical reviews of the named revisions, not a self-certification
-    of this metadata or an approval of later changes. Each release candidate
-    requires applicable independent review and a separate publication decision.
+    Independent agent reviewers assessed the mathematical core and later
+    module/example readiness, including API, proof evidence, semantics,
+    provenance and rights. Those assessments apply only to their reviewed
+    revisions, not automatically to later documentation, public history,
+    publication or source coverage. Each release requires applicable checks,
+    affected independent review and a separate maintainer decision.
 
 acknowledgements: >-
   Lean and mathlib authors for the proof assistant, tactics and native

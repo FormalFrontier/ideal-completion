@@ -5,7 +5,9 @@ public declarations defined by this library, including both typeclass instances.
 It supplies the native displayed signatures, all implicit lattice parameters,
 docstrings and relative source links. The mathematical explanation and public-import
 example are in the root README. Private helpers and examples still require the
-complete proof audit; they are not additional public API documentation.
+complete actual transitive standard-axiom audit alongside the ordinary build;
+they are not additional public API documentation. Separate stored-proof replay
+is not a release prerequisite.
 
 The reference deliberately does not ship a dependency website, JavaScript, fonts
 or remotely loaded styles. It does not provide interactive search or claim to
@@ -72,8 +74,15 @@ input JSON was genuinely produced by doc-gen4, nor a kernel or release checker.
 `api-manifest.json` records the exact analyzed revision, all three source hashes,
 toolchain/Lake configuration/manifest hashes, native-record hashes and generated
 reference hash. If a later candidate changes only documentation, identical
-source/pin hashes make that correspondence inspectable; any source/pin change
-requires a new native generation and affected verification.
+source/pin hashes make that exact-input correspondence inspectable, subject to
+affected prose and link review. If sources or pins change, reassess affected
+signatures and navigation: the adapter's `--check` cannot certify changed inputs
+against the old manifest. An honestly labeled historical reference may remain
+bound to its exact analyzed inputs, with reviewed current navigation where
+appropriate; regenerate natively when needed to represent a changed current
+API accurately. Unrelated source changes alone do not mandate expensive native
+regeneration. Never relabel old native output as new, silently retarget source
+line links, or use the absent-Git-object fallback on a source/hash mismatch.
 
 Public releases have independent Git ancestry, so the recorded development
 commit may be absent. When it is present, the adapter checks the sources against

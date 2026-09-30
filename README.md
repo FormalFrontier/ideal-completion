@@ -2,23 +2,42 @@
 
 Reusable Lean theory of ideal completions of bounded distributive lattices.
 
-The API equips the order ideals of a bounded distributive lattice with
-their frame (complete Heyting algebra) structure. It bundles the principal-ideal
-embedding as a bounded lattice homomorphism and identifies the compact elements
-of the ideal completion exactly with the principal ideals. Consequently, ideal
-completions are compactly generated. Here an ideal is mathlib's nonempty directed
-lower set, and "compact element" is an order-theoretic condition, not finiteness
-of the ideal's underlying set. No nontriviality assumption is imposed on the
-lattice.
+For `A` with `[DistribLattice A]` and `[BoundedOrder A]`, this library works
+with mathlib's order ideals: nonempty, directed lower sets. It constructs a
+principal-ideal embedding, equips `Order.Ideal A` with a frame (complete Heyting
+algebra) structure, and characterizes its order-theoretically compact elements.
+No finiteness or nontriviality assumption on `A` is needed.
 
-The scope of this library does not assert completion of a source text. Prime
-ideals, Stone duality, spectra and a universal extension property for maps out of
-the completion are not provided by this library.
+## Headline results
+
+- **Principal embedding.** [`Order.Ideal.principalHom`](IdealCompletion/OrderIdeal.lean#L29)
+  sends `a` to its principal ideal as a bounded lattice homomorphism;
+  [`principalHom_injective`](IdealCompletion/OrderIdeal.lean#L47) shows it is
+  injective. Its operation laws are available through the bundled homomorphism.
+- **Frame and arbitrary suprema.** The
+  [`Order.Frame` instance](IdealCompletion/OrderIdeal.lean#L96) makes the ideal
+  completion a complete Heyting algebra. The
+  [`mem_sSup_iff` theorem](IdealCompletion/OrderIdeal.lean#L77) characterizes
+  `x ∈ sSup S` by a finite set of elements, each in some ideal of the *arbitrary*
+  family `S`, whose join is **at least** `x`. This includes the empty-family and
+  bottom cases; it is not restricted to directed families.
+- **Compact generation.** Every principal ideal is
+  [compact](IdealCompletion/OrderIdeal.lean#L116), and
+  [`isCompactElement_iff_eq_principal`](IdealCompletion/OrderIdeal.lean#L141)
+  identifies **all** compact ideals as principal. The
+  [`IsCompactlyGenerated` instance](IdealCompletion/OrderIdeal.lean#L168)
+  expresses every ideal as a supremum of compact ideals. Compactness here is
+  order-theoretic, not finiteness of the ideal's underlying set.
+
+These constructions and proofs build on mathlib's existing ideal, lattice and
+compactness infrastructure. They do not establish prime-ideal existence,
+spectra, Stone duality, a universal extension property, generic partial-order
+completion, or completion of any source text.
 
 This repository is organized around reusable order theory. Source-specific
 interpretation, provenance, correspondence, and coverage remain in the relevant
-source-metadata repositories. Anchor is responsible for the initial integration
-on behalf of the source-maintainer team.
+source-metadata repositories; the Formal Frontier source-maintainer team
+maintains this library.
 
 The [generated API reference](docs/API.md) lists every public declaration and
 its complete native display signature, including implicit lattice parameters.
@@ -85,15 +104,15 @@ schema used during this readiness work:
 check-jsonschema --schemafile https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/v0.4.schema.json formalization.yaml
 ```
 
-A successful ordinary build or metadata validation is not release acceptance.
-Release verification must additionally audit every shipped mathematical
-declaration, including private and generated declarations and examples, and
-separately recheck stored proof terms with a compatible checker. It must also
-cover selected linters, generated API documentation, complete semantic review
-and measured build/client resource baselines. Author verification evidence and
-the generated API reference require applicable independent review; neither alone
-is a release decision. The metadata records revision-specific review history,
-which does not itself assert publication or approval of later revisions.
+A successful applicable build in the pinned environment and a complete audit of
+actual *transitive* axiom dependencies are required for release verification,
+including private and generated declarations and the separate examples. Only
+`propext`, `Classical.choice` and `Quot.sound` are permitted. Applicable existing
+CI build/audit evidence may be reused when its inputs match; affected content
+also needs independent review and maintainer acceptance. Neither a schema check
+nor this API reference certifies a release. Separate stored-proof replay,
+unaffected doc generation, repeated consumer builds and new resource benchmarks
+are not additional prerequisites.
 
 ### Initial resource baseline
 
@@ -106,15 +125,16 @@ measurements with warm dependency and filesystem caches, not cold-download or
 whole-mathlib-build estimates. Timing includes the recorder's roughly 0.5-second
 sampling granularity. No speedup or cross-machine guarantee is claimed.
 
-The separate, single-threaded stored-proof checks took 9.52 seconds for each
-nonempty module and 1.50 seconds for the empty re-export. Their maximum sampled
-container usage was 17.75 GB total, 7.56 GB anonymous memory and 13.63 GB approximate
-working set (total less inactive file cache); these are not per-process peak RSS
-measurements. A combined checker attempt was stopped at approximately 20.58 GB
-working set, without an OOM kill. Run the complete proof checks one target at a
-time with adequate headroom; do not use that incomplete combined attempt as a
-proof pass. Network/cache setup and rebuilding the optional documentation tool
-are additional costs not included in these timings.
+Historical separate, single-threaded stored-proof checks took 9.52 seconds for
+each nonempty module and 1.50 seconds for the empty re-export. Their maximum
+sampled container usage was 17.75 GB total, 7.56 GB anonymous memory and
+13.63 GB approximate working set (total less inactive file cache), **not**
+per-process peak RSS or minimum memory for building this library. The 23 GiB
+limit was the historical container capacity, not a measured requirement. A
+combined checker attempt was stopped at approximately 20.58 GB working set,
+without an OOM kill; it was incomplete and is not a proof pass or a direction
+to repeat those expensive checks. Network/cache setup and optional documentation
+tool rebuilding were not included in these timings.
 
 ## Mathematical references and credit
 
@@ -126,18 +146,12 @@ are the order-theoretic compact elements used here. This library gives reusable
 Lean proofs using mathlib's existing order ideals and compactness notions;
 detailed source correspondence and coverage remain outside this repository.
 
-Authors: Formal Frontier Agents. The mathematical core was developed by
-Formal Frontier's Anchor AI agent, with
-fresh-context review of the mathematical core by a separate Formalization
-Worker A execution. The module/example readiness repair was contributed by
-Formalization Worker B (Task `hive-request-f6e376d59317bb90c8b4e22bcab97f93cace7484`,
-UID `1f6cb9cb-b67e-43df-82c0-f0ea17d39104`, commit
-`929377cd6c3ec229e886286c6eb33f3837e776c5`), independently reviewed by a fresh
-Worker A execution. Anchor prepared the generated-reference adapter and assembly.
-AI agents also prepare maintenance changes and review
-evidence; this is not a claim of human peer review or source-author endorsement.
-The initial accepted core is commit `5626929044338bfda910936feca0ca416ab816ba`;
-later changes require their own applicable review.
+Authors: Formal Frontier Agents. The mathematical core was developed by the
+Formal Frontier Anchor AI agent; a separate AI contributor prepared the
+module/example readiness work. Anchor prepared the generated-reference adapter
+and release assembly. Independent AI agent executions reviewed the core and
+readiness work. This is not a claim of human peer review or source-author
+endorsement.
 
 Lean and mathlib provide the proof infrastructure and underlying mathematical
 definitions. Their authors retain their respective credit and licenses. Unless
