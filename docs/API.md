@@ -1,3 +1,13 @@
+> **Historical scope (human-maintained notice):** The generated reference below
+> covers the seven public declarations of the ideal-completion library at its
+> [recorded source revision](api-manifest.json), when `IdealCompletion` imported
+> only `IdealCompletion.OrderIdeal`. The current aggregate also publicly imports
+> `IdealCompletion.PrimeIdeal`; see the [prime-ideal API guide](PrimeIdeals.md).
+> References below to "every public declaration" and "its leaf" describe that
+> historical revision, not the current library. The manifest's `api_sha256`
+> hashes the unchanged generated payload beginning at `# Generated API reference`,
+> excluding this notice.
+
 # Generated API reference
 
 This reference covers every public declaration defined by ideal-completion.

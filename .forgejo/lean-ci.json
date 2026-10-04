@@ -6,7 +6,8 @@
       "path": ".",
       "targets": [
         "IdealCompletion",
-        "IdealCompletionExamples"
+        "IdealCompletionExamples",
+        "IdealCompletionPrimeIdealExamples"
       ]
     }
   ],

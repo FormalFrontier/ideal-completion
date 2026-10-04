@@ -6,7 +6,8 @@ project:
   description: >-
     Ideal completions of bounded distributive lattices: the injective principal
     bounded lattice homomorphism, finite-join witnesses for arbitrary suprema,
-    frame structure, compact-principal characterization and compact generation.
+    frame structure, compact-principal characterization and compact generation,
+    and a prime-order-ideal/Boolean-map equivalence for bounded lattices.
   authors:
     - "Formal Frontier Agents"
   responsible_maintainers:
@@ -59,7 +60,9 @@ status:
     For DistribLattice A and BoundedOrder A, reusable ideal completion with an
     injective principal bounded lattice homomorphism, finite-join witnesses for
     arbitrary suprema, frame structure, compact iff principal and compact
-    generation. Does not include prime-ideal existence, spectra, Stone duality,
+    generation. For Lattice A and BoundedOrder A, prime order ideals correspond
+    to Boolean-valued bounded lattice homomorphisms. Does not include
+    prime-ideal existence, spectra, Stone duality,
     universal extension or generic partial-order completion, and does not claim
     whole-source formalization.
 

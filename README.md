@@ -1,12 +1,16 @@
 # ideal-completion
 
-Reusable Lean theory of ideal completions of bounded distributive lattices.
+Reusable Lean theory of ideal completions and prime order ideals.
 
 For `A` with `[DistribLattice A]` and `[BoundedOrder A]`, this library works
 with mathlib's order ideals: nonempty, directed lower sets. It constructs a
 principal-ideal embedding, equips `Order.Ideal A` with a frame (complete Heyting
 algebra) structure, and characterizes its order-theoretically compact elements.
 No finiteness or nontriviality assumption on `A` is needed.
+
+For any bounded lattice, prime order ideals also correspond to bounded lattice
+homomorphisms into `Bool`, without assuming distributivity or decidable ideal
+membership.
 
 ## Headline results
 
@@ -28,6 +32,14 @@ No finiteness or nontriviality assumption on `A` is needed.
   [`IsCompactlyGenerated` instance](IdealCompletion/OrderIdeal.lean#L168)
   expresses every ideal as a supremum of compact ideals. Compactness here is
   order-theoretic, not finiteness of the ideal's underlying set.
+- **Prime ideals and Boolean-valued maps.** For `[Lattice A]` and
+  `[BoundedOrder A]`,
+  [`Order.Ideal.primeEquivBoolHom`](IdealCompletion/PrimeIdeal.lean)
+  identifies prime order ideals with bounded lattice homomorphisms `A → Bool`.
+  The characteristic map sends precisely the ideal to `false`; conversely
+  [`BoundedLatticeHom.falseIdeal`](IdealCompletion/PrimeIdeal.lean)
+  is its prime false fiber. Every such map is surjective. This includes the
+  one-element lattice, for which both sides of the equivalence are empty.
 
 These constructions and proofs build on mathlib's existing ideal, lattice and
 compactness infrastructure. They do not establish prime-ideal existence,
@@ -39,11 +51,11 @@ interpretation, provenance, correspondence, and coverage remain in the relevant
 source-metadata repositories; the Formal Frontier source-maintainer team
 maintains this library.
 
-The [generated API reference](docs/API.md) lists every public declaration and
-its complete native display signature, including implicit lattice parameters.
-It is shipped with the matching source, without requiring a documentation server.
-Its [generation and source-binding record](docs/README.md) explains reproducibility
-and the absence of a bundled dependency website or interactive search.
+The [generated API reference](docs/API.md) is bound to an earlier seven-declaration
+ideal-completion revision and does **not** cover the new prime-ideal module or
+the current aggregate import. See the [prime-ideal API guide](docs/PrimeIdeals.md)
+for the new declarations, and [reference scope and generation](docs/README.md)
+for the historical native signatures and exact source binding.
 
 ## Public interface
 
@@ -74,9 +86,16 @@ The main interface, in namespace `Order.Ideal`, is:
 | `isCompactElement_iff_eq_principal` | Every compact ideal is principal, and conversely |
 | `IsCompactlyGenerated (Order.Ideal A)` | Compact generation, inferred by typeclass search |
 
+The separate [prime-ideal guide](docs/PrimeIdeals.md) covers the equivalence,
+both inverse constructions, characteristic evaluation, and false-fiber laws
+for arbitrary bounded lattices.
+
 The examples also exercise operation laws, the image of the embedding, and the
 bottom/empty-family cases. They import only the public aggregate module and store
 twelve named private clients for inspection without extending the public API.
+[Prime-ideal examples](IdealCompletionPrimeIdealExamples.lean) additionally
+instantiate the correspondence on `Bool` and `Bool × Bool` and check its empty
+boundary on `PUnit`.
 
 ## Build and checks
 
@@ -89,10 +108,10 @@ lake exe cache get
 lake --wfail build
 ```
 
-The default build includes both `IdealCompletion` and the separate
-`IdealCompletionExamples` target. To select the latter explicitly, use
-`lake --wfail build IdealCompletionExamples`. Examples are not imported by the
-public library. Fetch the matching mathlib cache again after replacing `.lake`
+The default build includes `IdealCompletion` and the separate
+`IdealCompletionExamples` and `IdealCompletionPrimeIdealExamples` targets.
+Examples are not imported by the public library. Fetch the matching mathlib
+cache again after replacing `.lake`
 or changing the pinned toolchain/dependencies; do not silently rebuild mathlib
 from source when cache retrieval fails.
 
@@ -118,9 +137,10 @@ are not additional prerequisites.
 
 On 2026-09-25, in a Linux x86-64 container with a 23 GiB memory limit, Lean
 4.34.0-rc2 and the committed dependency pins, a clean compilation of the three
-shipped modules took 5.01 seconds after the dependencies were available from the
-matching mathlib cache. The subsequent no-target default check took 1.50 seconds;
-an external public-import client took 2.01 seconds. These are single local
+then-shipped ideal-completion modules took 5.01 seconds after the dependencies
+were available from the matching mathlib cache. The subsequent no-target default
+check took 1.50 seconds; an external public-import client took 2.01 seconds.
+These are single local
 measurements with warm dependency and filesystem caches, not cold-download or
 whole-mathlib-build estimates. Timing includes the recorder's roughly 0.5-second
 sampling granularity. No speedup or cross-machine guarantee is claimed.
@@ -142,8 +162,11 @@ The construction is classical order theory. A motivating account is Kazuhiro
 Fujiwara and Fumiharu Kato, *Foundations of Rigid Geometry I*,
 [arXiv:1308.4734v5](https://arxiv.org/abs/1308.4734v5), Chapter 0, §2.2(b),
 the paragraph after Definition 2.2.6 (printed page 38). Its "finite elements"
-are the order-theoretic compact elements used here. This library gives reusable
-Lean proofs using mathlib's existing order ideals and compactness notions;
+are the order-theoretic compact elements used here. Definition 2.2.7 of the same
+account motivates the prime-ideal/Boolean-map construction in the distributive
+setting; this library's two-sided bounded-lattice correspondence does not require
+distributivity. This library gives reusable Lean proofs using mathlib's existing
+order ideals, prime ideals and compactness notions;
 detailed source correspondence and coverage remain outside this repository.
 
 Authors: Formal Frontier Agents. The mathematical core was developed by the

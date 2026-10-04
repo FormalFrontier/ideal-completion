@@ -158,9 +158,11 @@ def render(records, revision, sources):
                              doc=info["doc"].strip(), path=path, line=info["line"]))
     require(found == EXPECTED, "missing public declaration")
     rows.sort(key=lambda row: row["line"])
-    lines = ["# Generated API reference", "",
-             "This reference covers every public declaration defined by ideal-completion.",
-             "Import `IdealCompletion`; its leaf is `IdealCompletion.OrderIdeal`.",
+    lines = ["# Historical generated API reference", "",
+             "This reference covers the seven public ideal-completion declarations at",
+             "its recorded source revision. At that revision, `IdealCompletion` imported",
+             "only `IdealCompletion.OrderIdeal`. The current aggregate also publicly",
+             "imports `IdealCompletion.PrimeIdeal`; see the [prime-ideal API guide](PrimeIdeals.md).",
              "`Examples.IdealCompletion` contains private checked clients, not additional public API.", "",
              "Headers below are native doc-gen4 display signatures, not complete declarations",
              "with proof bodies. Short mathematical names use the source's `Order.Ideal`",

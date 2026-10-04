@@ -33,10 +33,33 @@ class Controls(unittest.TestCase):
         raw, manifest = api.render(records, REV, sources)
         facts = json.loads(manifest)
         self.assertEqual(raw.count(b"\n## Order.Ideal."), 7)
+        self.assertIn(b"seven public ideal-completion declarations", raw)
+        self.assertIn(b"current aggregate also publicly", raw)
+        self.assertIn(b"`IdealCompletion.PrimeIdeal`", raw)
+        self.assertIn(b"[prime-ideal API guide](PrimeIdeals.md)", raw)
+        self.assertNotIn(b"every public declaration", raw)
         self.assertEqual(facts["api_sha256"], api.digest(raw))
         self.assertEqual(set(facts["inputs"]), set(api.INPUTS))
         self.assertNotIn(b"example.invalid", raw + manifest)
         self.assertFalse(facts["proof_certification"])
+
+    def test_historical_payload_and_scope_notice(self):
+        root = Path(__file__).resolve().parent.parent
+        page = (root / "docs/API.md").read_bytes()
+        marker = b"# Generated API reference\n\n"
+        self.assertEqual(page.count(marker), 1)
+        notice, body = page.split(marker, 1)
+        manifest = json.loads((root / "docs/api-manifest.json").read_bytes())
+        self.assertEqual(api.digest(marker + body), manifest["api_sha256"])
+        self.assertEqual(manifest["analyzed_source_revision"],
+                         "3359d255c9831e0806ca6fe8c86ce6a327783f64")
+        self.assertEqual(len(manifest["public_declarations"]), 7)
+        self.assertIn(b"human-maintained notice", notice)
+        self.assertIn(b"current aggregate also publicly imports", notice)
+        self.assertIn(b"`IdealCompletion.PrimeIdeal`", notice)
+        for linked_file in ("PrimeIdeals.md", "api-manifest.json"):
+            self.assertIn(("(" + linked_file + ")").encode(), notice)
+            self.assertTrue((root / "docs" / linked_file).is_file())
 
     def test_implicit_arguments_and_entities_retained(self):
         header = api.Header('<div><span>{A : Type u} [DistribLattice A] '

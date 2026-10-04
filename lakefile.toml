@@ -1,6 +1,12 @@
 name = "ideal-completion"
 version = "0.1.0"
-defaultTargets = ["IdealCompletion", "IdealCompletionExamples"]
+defaultTargets = ["IdealCompletion", "IdealCompletionExamples", "IdealCompletionPrimeIdealExamples"]
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+weak.linter.style.header = false
 
 [[require]]
 name = "mathlib"
@@ -13,3 +19,7 @@ name = "IdealCompletion"
 [[lean_lib]]
 name = "IdealCompletionExamples"
 roots = ["Examples.IdealCompletion"]
+
+[[lean_lib]]
+name = "IdealCompletionPrimeIdealExamples"
+roots = ["IdealCompletionPrimeIdealExamples"]
