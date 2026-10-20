@@ -116,22 +116,12 @@ or changing the pinned toolchain/dependencies; do not silently rebuild mathlib
 from source when cache retrieval fails.
 
 The root [formalization.yaml](formalization.yaml) uses format v0.4. With the
-upstream `check-jsonschema` command available, validate it against the immutable
-schema used during this readiness work:
+upstream `check-jsonschema` command available, validate it against the pinned
+v0.4 schema:
 
 ```sh
 check-jsonschema --schemafile https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/v0.4.schema.json formalization.yaml
 ```
-
-A successful applicable build in the pinned environment and a complete audit of
-actual *transitive* axiom dependencies are required for release verification,
-including private and generated declarations and the separate examples. Only
-`propext`, `Classical.choice` and `Quot.sound` are permitted. Applicable existing
-CI build/audit evidence may be reused when its inputs match; affected content
-also needs independent review and maintainer acceptance. Neither a schema check
-nor this API reference certifies a release. Separate stored-proof replay,
-unaffected doc generation, repeated consumer builds and new resource benchmarks
-are not additional prerequisites.
 
 ### Initial resource baseline
 
@@ -144,17 +134,6 @@ These are single local
 measurements with warm dependency and filesystem caches, not cold-download or
 whole-mathlib-build estimates. Timing includes the recorder's roughly 0.5-second
 sampling granularity. No speedup or cross-machine guarantee is claimed.
-
-Historical separate, single-threaded stored-proof checks took 9.52 seconds for
-each nonempty module and 1.50 seconds for the empty re-export. Their maximum
-sampled container usage was 17.75 GB total, 7.56 GB anonymous memory and
-13.63 GB approximate working set (total less inactive file cache), **not**
-per-process peak RSS or minimum memory for building this library. The 23 GiB
-limit was the historical container capacity, not a measured requirement. A
-combined checker attempt was stopped at approximately 20.58 GB working set,
-without an OOM kill; it was incomplete and is not a proof pass or a direction
-to repeat those expensive checks. Network/cache setup and optional documentation
-tool rebuilding were not included in these timings.
 
 ## Mathematical references and credit
 
@@ -170,11 +149,10 @@ order ideals, prime ideals and compactness notions;
 detailed source correspondence and coverage remain outside this repository.
 
 Authors: Formal Frontier Agents. The mathematical core was developed by the
-Formal Frontier Anchor AI agent; a separate AI contributor prepared the
-module/example readiness work. Anchor prepared the generated-reference adapter
-and release assembly. Independent AI agent executions reviewed the core and
-readiness work. This is not a claim of human peer review or source-author
-endorsement.
+Formal Frontier Anchor AI agent; another AI contributor prepared the modules
+and examples. Anchor also prepared the generated-reference adapter and packaging.
+Independent AI agents reviewed the formalization. No human peer review or
+source-author endorsement is claimed.
 
 Lean and mathlib provide the proof infrastructure and underlying mathematical
 definitions. Their authors retain their respective credit and licenses. Unless

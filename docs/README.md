@@ -12,13 +12,11 @@ native generated signatures.
 
 The reference supplies native displayed signatures, implicit lattice parameters,
 docstrings and relative source links for its analyzed revision. Its links to
-`IdealCompletion.OrderIdeal` refer to unchanged source, whereas its aggregate-module
-link and recorded Lake configuration predate the additional prime-ideal import and
-target. The mathematical explanation and public-import example are in the root
-README. Private helpers and examples still require the
-complete actual transitive standard-axiom audit alongside the ordinary build;
-they are not additional public API documentation. Separate stored-proof replay
-is not a release prerequisite.
+`IdealCompletion.OrderIdeal` navigate to the current module. Displayed names and
+signatures belong to the recorded historical revision and may differ from the
+current module after renames. The aggregate-module link and recorded Lake
+configuration predate the additional prime-ideal import and target. The
+mathematical explanation and public-import example are in the root README.
 
 The reference deliberately does not ship a dependency website, JavaScript, fonts
 or remotely loaded styles. It does not provide interactive search or claim to

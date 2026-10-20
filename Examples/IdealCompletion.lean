@@ -5,14 +5,19 @@ Authors: Formal Frontier Agents
 -/
 module
 
+public import Mathlib.Basic.IsEmpty.Defs
+public import Mathlib.Order.Hom.BoundedLattice
 import IdealCompletion
 
 /-!
 # Using ideal completions
 
-These named private clients use only the public aggregate import, without opening
+This module provides a public concrete boundary result: no bounded lattice hom
+exists from the singleton lattice to `Bool`. Import `Examples.IdealCompletion`
+directly to use this API.
+
+The named private clients use only the public aggregate import, without opening
 private declarations or reproducing the implementation of the library's results.
-They are a separate default build target, not part of the library's public API.
 -/
 
 open Order
@@ -72,3 +77,18 @@ private theorem bottom_compact : IsCompactElement (Ideal.principal (⊥ : A)) :=
 private theorem empty_sSup : sSup (∅ : Set (Ideal A)) = ⊥ := sSup_empty
 
 end IdealCompletionExamples
+
+namespace BoundedLatticeHom
+
+/-- There is no bounded lattice homomorphism from the singleton lattice to `Bool`:
+the bounds coincide in the source but are distinct in the target. -/
+public theorem isEmpty_punit_bool : IsEmpty (BoundedLatticeHom PUnit Bool) := by
+  refine ⟨fun f => ?_⟩
+  have h : (false : Bool) = true := by
+    calc
+      false = f (⊥ : PUnit) := (map_bot f).symm
+      _ = f (⊤ : PUnit) := congrArg f (Subsingleton.elim _ _)
+      _ = true := map_top f
+  exact Bool.false_ne_true h
+
+end BoundedLatticeHom

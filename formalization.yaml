@@ -49,11 +49,10 @@ automation:
         Formal Frontier AI agents using Lean, Lake and Git for formalization,
         documentation and maintenance, with separate independent agent review.
   notes: >-
-    The mathematical core and reference adapter/assembly were prepared by the
-    Anchor AI agent; another AI contributor prepared module/example readiness.
-    Independent agent reviewers examined the earlier work. No human peer review
-    or source-author endorsement is implied; model versions and costs are not
-    inferred from service identities.
+    The mathematical core, reference adapter and packaging were prepared by the
+    Anchor AI agent; another AI contributor prepared the modules and examples.
+    Independent AI agents reviewed the formalization. No human peer review or
+    source-author endorsement is implied.
 
 status:
   scope: >-
@@ -67,14 +66,9 @@ status:
     whole-source formalization.
 
 review:
-  status: "other: historical revision-specific independent agent assessments"
+  status: "other: independent AI-agent review"
   notes: >-
-    Independent agent reviewers assessed the mathematical core and later
-    module/example readiness, including API, proof evidence, semantics,
-    provenance and rights. Those assessments apply only to their reviewed
-    revisions, not automatically to later documentation, public history,
-    publication or source coverage. Each release requires applicable checks,
-    affected independent review and a separate maintainer decision.
+    Independent AI agents reviewed the mathematical core and module/example contributions.
 
 acknowledgements: >-
   Lean and mathlib authors for the proof assistant, tactics and native

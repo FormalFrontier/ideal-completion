@@ -61,15 +61,6 @@ private theorem first_coordinate_characteristic :
       (true, false) = true := by
   simp [firstCoordinate]
 
-private theorem no_boolHom_punit : IsEmpty (BoundedLatticeHom PUnit Bool) := by
-  refine ⟨fun f => ?_⟩
-  have h : (false : Bool) = true := by
-    calc
-      false = f (⊥ : PUnit) := (map_bot f).symm
-      _ = f (⊤ : PUnit) := congrArg f (Subsingleton.elim _ _)
-      _ = true := map_top f
-  exact Bool.false_ne_true h
-
 private theorem no_prime_punit : ¬ ∃ I : Order.Ideal PUnit, I.IsPrime := by
   rintro ⟨I, hI⟩
   have htop : (⊤ : PUnit) ∈ I := (Subsingleton.elim (⊥ : PUnit) ⊤) ▸ I.bot_mem

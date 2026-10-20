@@ -95,7 +95,7 @@ theorem mem_sSup_iff {S : Set (Ideal A)} {x : A} :
 
 /-- The ideal completion of a bounded distributive lattice is a frame, also
 known as a complete Heyting algebra. -/
-instance : Order.Frame (Ideal A) :=
+instance instFrameIdealCompletion : Order.Frame (Ideal A) :=
   Order.Frame.ofMinimalAxioms {
     inf_sSup_le_iSup_inf := by
       intro I S x hx
