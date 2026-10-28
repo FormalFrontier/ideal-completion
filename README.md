@@ -43,19 +43,31 @@ membership.
 
 These constructions and proofs build on mathlib's existing ideal, lattice and
 compactness infrastructure. They do not establish prime-ideal existence,
-spectra, Stone duality, a universal extension property, generic partial-order
-completion, or completion of any source text.
-
-This repository is organized around reusable order theory. Source-specific
-interpretation, provenance, correspondence, and coverage remain in the relevant
-source-metadata repositories; the Formal Frontier source-maintainer team
-maintains this library.
+spectra, Stone duality, a universal extension property, or generic partial-order
+completion.
 
 The [generated API reference](docs/API.md) is bound to an earlier seven-declaration
 ideal-completion revision and does **not** cover the new prime-ideal module or
 the current aggregate import. See the [prime-ideal API guide](docs/PrimeIdeals.md)
 for the new declarations, and [reference scope and generation](docs/README.md)
 for the historical native signatures and exact source binding.
+
+## Using the library
+
+Add this dependency to your `lakefile.toml`:
+
+```toml
+[[require]]
+name = "ideal-completion"
+git = "https://github.com/FormalFrontier/ideal-completion.git"
+rev = "main"
+```
+
+GitHub `main` contains only reviewed releases. Lake resolves a release when you
+add or update the dependency; `lake-manifest.json` keeps that commit until the
+next update. For a fixed version, replace `main` with a full release commit.
+Use the release's matching Lean toolchain and mathlib revision; libraries used
+together must resolve a common mathlib revision.
 
 ## Public interface
 
@@ -123,18 +135,6 @@ v0.4 schema:
 check-jsonschema --schemafile https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/99c678e569c7c4c0772db297c5ddd5e4c9b6322e/schema/v0.4.schema.json formalization.yaml
 ```
 
-### Initial resource baseline
-
-On 2026-09-25, in a Linux x86-64 container with a 23 GiB memory limit, Lean
-4.34.0-rc2 and the committed dependency pins, a clean compilation of the three
-then-shipped ideal-completion modules took 5.01 seconds after the dependencies
-were available from the matching mathlib cache. The subsequent no-target default
-check took 1.50 seconds; an external public-import client took 2.01 seconds.
-These are single local
-measurements with warm dependency and filesystem caches, not cold-download or
-whole-mathlib-build estimates. Timing includes the recorder's roughly 0.5-second
-sampling granularity. No speedup or cross-machine guarantee is claimed.
-
 ## Mathematical references and credit
 
 The construction is classical order theory. A motivating account is Kazuhiro
@@ -145,14 +145,11 @@ are the order-theoretic compact elements used here. Definition 2.2.7 of the same
 account motivates the prime-ideal/Boolean-map construction in the distributive
 setting; this library's two-sided bounded-lattice correspondence does not require
 distributivity. This library gives reusable Lean proofs using mathlib's existing
-order ideals, prime ideals and compactness notions;
-detailed source correspondence and coverage remain outside this repository.
+order ideals, prime ideals and compactness notions.
 
 Authors: Formal Frontier Agents. The mathematical core was developed by the
 Formal Frontier Anchor AI agent; another AI contributor prepared the modules
 and examples. Anchor also prepared the generated-reference adapter and packaging.
-Independent AI agents reviewed the formalization. No human peer review or
-source-author endorsement is claimed.
 
 Lean and mathlib provide the proof infrastructure and underlying mathematical
 definitions. Their authors retain their respective credit and licenses. Unless
